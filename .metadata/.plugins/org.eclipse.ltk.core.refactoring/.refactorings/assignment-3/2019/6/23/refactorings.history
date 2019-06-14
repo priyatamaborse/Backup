@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename field &apos;book1&apos; in &apos;assignment.com.yash.training.LendingManagerImplTest&apos; to &apos;secondBook&apos;&#x0D;&#x0A;- Original project: &apos;assignment-3&apos;&#x0D;&#x0A;- Original element: &apos;assignment.com.yash.training.LendingManagerImplTest.book1&apos;&#x0D;&#x0A;- Renamed element: &apos;assignment.com.yash.training.LendingManagerImplTest.secondBook&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" delegate="false" deprecate="false" description="Rename field &apos;book1&apos;" flags="589826" getter="false" id="org.eclipse.jdt.ui.rename.field" input="/src\/test\/java&lt;assignment.com.yash.training{LendingManagerImplTest.java[LendingManagerImplTest^book1" name="secondBook" references="true" setter="false" stamp="1559545351102" textual="false" version="1.0"/>
+</session>

@@ -1,0 +1,26 @@
+package assignment.junit.com.yash.training;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
+
+import assignment.junit.com.yash.training.model.Product;
+
+@RunWith(value=MockitoJUnitRunner.class)
+public class ClientBOImplTest {
+	
+	@InjectMocks 
+	ClientBOImpl clBoImpl;
+	
+	@Mock
+	Product product;
+	
+	@Test
+	public void getClientProductsSum()
+	{
+		
+	}
+
+}

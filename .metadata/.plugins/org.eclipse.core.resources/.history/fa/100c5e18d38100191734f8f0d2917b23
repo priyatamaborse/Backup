@@ -1,0 +1,76 @@
+package assignment.com.yash.training;
+
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
+
+@RunWith(value=MockitoJUnitRunner.class)
+public class LendingManagerImplTest {
+
+	@InjectMocks
+	LendingManagerImpl lendingManagerImpl;
+	
+	@Mock
+	LibraryRecordDAO libraryRecordDAO;
+	
+	private List<String> listOfAuthors;
+	private Book book,book1,book3;
+	private List<LibraryRecord> libraryRecordsListWithEmptyBorrowingDate;
+	private List<LibraryRecord> libraryRecordsListWithNonEmptyBorrowingAndReturningDate;
+	private List<LibraryRecord> libraryRecordsListWithEmptyReturningDate;
+	
+	@Before
+	public void setUp()
+	{
+		listOfAuthors = new ArrayList<String>();
+		listOfAuthors.add("Herb's acclaimed");
+		listOfAuthors.add("Herbert Schildt");
+		
+		book = new Book(2147483649L, "123", "the complete reference java",listOfAuthors, "tmh", new Date(1999, 02, 02));
+		book1 = new Book(2147483649L, "123", "the complete reference Advance java",listOfAuthors, "tmr", new Date(1989, 04, 04));
+		
+		libraryRecordsListWithEmptyBorrowingDate = new ArrayList<LibraryRecord>();
+		libraryRecordsListWithNonEmptyBorrowingAndReturningDate = new ArrayList<LibraryRecord>();
+		libraryRecordsListWithEmptyReturningDate = new ArrayList<LibraryRecord>();
+		libraryRecordsListWithEmptyBorrowingDate.add(new LibraryRecord(1L, book, null, new Date(1999, 02, 02)));
+		libraryRecordsListWithNonEmptyBorrowingAndReturningDate.add(new LibraryRecord(2L, book1, new Date(1998, 03, 03), new Date(1998, 03, 03)));
+		libraryRecordsListWithEmptyReturningDate.add(new LibraryRecord(2L, book1, new Date(1998, 03, 03), null));
+	}
+	
+	@Test(expected=IllegalStateException.class)
+	public void shouldThrowIllegalStateExceptionWhenRecordHavingBorrowingDateIsNull()
+	{
+		when(libraryRecordDAO.findByBook(book1)).thenReturn(libraryRecordsListWithEmptyReturningDate);
+		
+		lendingManagerImpl.borrowBook(book1);
+	}
+	
+	@Test(expected=IllegalStateException.class)
+	public void shouldWhenRecordHavingReturningDateIsNull()
+	{
+		when(libraryRecordDAO.findByBook(book)).thenReturn(libraryRecordsListWithNonEmptyBorrowingAndReturningDate);
+		when(libraryRecordDAO.save(libraryRecordsListWithNonEmptyBorrowingAndReturningDate.get(0))).thenReturn(false);
+		
+		lendingManagerImpl.borrowBook(book1);
+	}
+	
+	@Test
+	public void shouldThrowIllegalStateExceptionwhenReturningDateIsNull()
+	{
+/*
+		when(libraryRecordDAO.findByBook(book)).thenReturn(libraryRecordsListWithNonEmptyBorrowingAndReturningDate);
+		when(libraryRecordDAO.save(libraryRecordsListWithNonEmptyBorrowingAndReturningDate.get(0))).thenReturn(true);
+		LibraryRecord actual= lendingManagerImpl.borrowBook(book1);
+		assertEquals(book1, actual.getBook());*/
+	}
+}

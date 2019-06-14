@@ -1,0 +1,35 @@
+package assignment.junit.com.yash.training;
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
+
+import assignment.junit.com.yash.training.model.Currency;
+import assignment.junit.com.yash.training.model.Product;
+import assignment.junit.com.yash.training.model.ProductType;
+
+@RunWith(value=MockitoJUnitRunner.class)
+public class ClientBOImplTest {
+	
+	@InjectMocks 
+	ClientBOImpl clBoImpl;
+	
+	@Mock
+	Product product;
+
+	
+	@Test
+	public void getClientProductsSum()
+	{
+		List<Product> products=new ArrayList<Product>();
+		products.add(new ProductImpl(1, "HomeLoan",ProductType.LOAN ,new AmountImpl(BigDecimal.ZERO,Currency.INDIAN_RUPEE)));
+		
+	}
+
+}

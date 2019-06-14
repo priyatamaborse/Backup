@@ -1,0 +1,59 @@
+package assignment.junit.com.yash.training;
+
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.when;
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
+
+import assignment.junit.com.yash.training.exception.DifferentCurrenciesException;
+import assignment.junit.com.yash.training.model.Amount;
+import assignment.junit.com.yash.training.model.Currency;
+import assignment.junit.com.yash.training.model.Product;
+import assignment.junit.com.yash.training.model.ProductType;
+
+@RunWith(value=MockitoJUnitRunner.class)
+public class ClientBOImplTest {
+	
+	@InjectMocks 
+	ClientBOImpl clientBoImpl;
+	
+	ProductImpl product,product1;
+	
+	List<Product> emptyProductList,nonEmptyProductList;
+	
+	@Before
+	public void setUp() {
+		
+		emptyProductList = new ArrayList<Product>();
+		nonEmptyProductList = new ArrayList<Product>();
+		nonEmptyProductList.add(new ProductImpl(1, "HomeLoan",ProductType.LOAN ,new AmountImpl(BigDecimal.ZERO,Currency.INDIAN_RUPEE)));
+		nonEmptyProductList.add(new ProductImpl(1, "Loan",ProductType.LOAN ,new AmountImpl(BigDecimal.ZERO,Currency.INDIAN_RUPEE)));
+
+	}
+
+	@Test
+	public void shouldReturnAmountImplWithBigDecimalZeroAndCurrencyEuroWhenProductListIsEmpty() throws DifferentCurrenciesException
+	{
+		Amount actual=clientBoImpl.getClientProductsSum(emptyProductList);
+		assertEquals(BigDecimal.ZERO,actual.getValue());
+		assertEquals(Currency.EURO, actual.getCurrency());
+	}
+
+	@Test(expected=DifferentCurrenciesException.class)
+	public void ShouldThrowDifferentCurrenciesExceptionIfCurrencyNotSameForAllProducts() throws DifferentCurrenciesException
+	{
+		Amount actual=clientBoImpl.getClientProductsSum(emptyProductList);
+		assertEquals(BigDecimal.ZERO,actual.getValue());
+		assertEquals(Currency.EURO, actual.getCurrency());
+	}
+}

@@ -1,0 +1,8 @@
+package assignment.junit.com.yash.training;
+
+import org.junit.runner.RunWith;
+
+@RunWith(value=)
+public class ClientBOImplTest {
+
+}

@@ -1,0 +1,107 @@
+package assignment.com.yash.training;
+
+public class TeaCoffeeVendingMachineSimulator {
+
+	private MyScanner scanner = new MyScanner();
+	TeaCoffeeVendingMachineOperationImpl teaCoffeeVendingMachineOperationImpl=new TeaCoffeeVendingMachineOperationImpl();
+	
+	public static void main(String[] args) {
+
+		TeaCoffeeVendingMachineSimulator teaCoffeeVendingMachineSimulator = new TeaCoffeeVendingMachineSimulator();
+		teaCoffeeVendingMachineSimulator.menuList(false);
+	}
+	
+	public void menuList(Boolean quit)
+	{
+		Integer menuItem ,numberOfDrinks;
+		//Boolean resetSuccessful;
+		
+		do {
+
+			System.out.println("Choose menu item of your choice: ");
+			System.out.println("1. MAKE COFFEE ");
+			System.out.println("2. MAKE TEA ");
+			System.out.println("3. MAKE BLACK COFFEE ");
+			System.out.println("4. MAKE BLACK TEA ");
+			System.out.println("5. REFILL CONTAINER ");
+			System.out.println("6. CHECK TOTAL SALE");
+			System.out.println("7. CONTAINER STATUS ");
+			System.out.println("8. RESET CONTAINER ");
+			System.out.println("0. EXIT TCVM ");
+			
+			menuItem = scanner.nextInt();
+
+			switch (menuItem) {
+
+			case 1:
+				
+				System.out.println(" How many Cup Of Coffee do you want ? Each cup for RS 15 /-");
+				numberOfDrinks = scanner.nextInt();
+				teaCoffeeVendingMachineOperationImpl.makeDrink(new ContainerMaterialDTO(0, 5, 17, 23, 88),numberOfDrinks,15);
+
+				break;
+
+			case 2:
+
+				System.out.println(" How many Cup Of Tea do you want ? Each cup for RS 10 /-");
+				numberOfDrinks = scanner.nextInt();
+				teaCoffeeVendingMachineOperationImpl.makeDrink(new ContainerMaterialDTO(6, 0, 17, 65, 44),numberOfDrinks,10);
+
+				break;
+
+			case 3:
+
+				System.out.println("How many Cup Of Black Coffee do you want ? Each cup for RS 10 /-");
+				numberOfDrinks = scanner.nextInt();
+				teaCoffeeVendingMachineOperationImpl.makeDrink(new ContainerMaterialDTO(0, 3, 17, 112, 0),numberOfDrinks,10);
+
+				break;
+
+			case 4:
+
+				System.out.println("How many Cup Of Black Tea do you want ? Each cup for RS 5 /-");
+				numberOfDrinks = scanner.nextInt();
+				teaCoffeeVendingMachineOperationImpl.makeDrink(new ContainerMaterialDTO(3, 0, 17, 112, 0),numberOfDrinks,5);
+
+				break;
+
+			case 5:
+				teaCoffeeVendingMachineOperationImpl.refillContainer();
+				break;
+
+			case 6:
+
+				System.out.println(" Check Total Sale ");
+
+
+				break;
+
+			case 7:
+
+				System.out.println("Container Status");
+
+
+				break;
+
+			case 8:
+
+				resetSuccessful = teaCoffeeVendingMachineOperationImpl.resetContainer();
+
+				break;
+
+			case 0:
+
+				quit = true;
+
+				break;
+
+			default:
+				//quit = false;
+				System.out.println("Invalid choice.");
+
+			}
+
+		} while (!quit);
+	}
+
+}

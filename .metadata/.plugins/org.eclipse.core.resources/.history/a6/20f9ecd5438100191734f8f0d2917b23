@@ -1,0 +1,53 @@
+package assignment.com.yash.training;
+
+import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
+
+@RunWith(value=MockitoJUnitRunner.class)
+public class LendingManagerImplTest {
+
+	@InjectMocks
+	LendingManagerImpl lendingManagerImpl;
+	
+	@Mock
+	LibraryRecordDAO libraryRecordDAO;
+	
+	private List<String> listOfAuthors;
+	private Book book,book1,book3;
+	private List<LibraryRecord> libraryRecordsList;
+	
+	@Before
+	public void setUp()
+	{
+		listOfAuthors = new ArrayList<String>();
+		listOfAuthors.add("Herb's acclaimed");
+		listOfAuthors.add("Herbert Schildt");
+		
+		book = new Book(2147483649L, "123", "the complete reference java",listOfAuthors, "tmh", new Date(1999, 02, 02));
+		book1 = new Book(2147483649L, "123", "the complete reference Advance java",listOfAuthors, "tmr", new Date(1989, 04, 04));
+		
+		libraryRecordsList = new ArrayList<LibraryRecord>();
+		libraryRecordsList.add(new LibraryRecord(1L, book, new Date(1999, 02, 02), new Date(1999, 02, 02)));
+		libraryRecordsList.add(new LibraryRecord(2L, book1, new Date(1998, 03, 03), new Date(1998, 03, 03)));
+		
+	}
+	
+	@Test
+	public void shouldThrowIllegalStateExceptionWhenRecordHavingReturningDateIsNull()
+	{
+		when(libraryRecordDAO.findByBook(book)).thenReturn(libraryRecordsList);
+		
+		
+	}
+	
+}
